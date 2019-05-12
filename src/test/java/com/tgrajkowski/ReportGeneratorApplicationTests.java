@@ -1,4 +1,4 @@
-package com.tgrajkowski.reportgenerator;
+package com.tgrajkowski;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -11,6 +11,7 @@ public class ReportGeneratorApplicationTests {
 
     @Test
     public void contextLoads() {
+
     }
 
 }
