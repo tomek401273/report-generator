@@ -74,12 +74,12 @@ public class JFreeChartServiceTime {
 
         InputStream inputStream = new ByteArrayInputStream(bas.toByteArray());
 
-        try (OutputStream out= new FileOutputStream("chart.png")){
-            ChartUtils.writeChartAsPNG(out, chart, 1200, 600);
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+//        try (OutputStream out= new FileOutputStream("chart.png")){
+//            ChartUtils.writeChartAsPNG(out, chart, 1200, 600);
+//
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
 
         return inputStream;
 

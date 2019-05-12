@@ -6,7 +6,6 @@ import fr.opensagres.xdocreport.converter.Options;
 import fr.opensagres.xdocreport.core.XDocReportException;
 import fr.opensagres.xdocreport.document.IXDocReport;
 import fr.opensagres.xdocreport.document.images.ByteArrayImageProvider;
-import fr.opensagres.xdocreport.document.images.FileImageProvider;
 import fr.opensagres.xdocreport.document.images.IImageProvider;
 import fr.opensagres.xdocreport.document.registry.XDocReportRegistry;
 import fr.opensagres.xdocreport.template.IContext;
@@ -39,14 +38,7 @@ public class ReportService {
             report.setFieldsMetadata(metadata);
 
             IContext context = report.createContext();
-            IImageProvider logo = new FileImageProvider(new File("chart.png"),
-                    false);
-//            IImageProvider iImageProvider = new FileImageProvider();
-//            logo.setHeight((float)300);
-//            logo.setWidth((float)650);
             IImageProvider iImageProvider = new ByteArrayImageProvider(inputStream);
-//            iImageProvider.setWidth((float)400);
-//            iImageProvider.setHeight((float)200);
 
 
             context.put("project", getProjectMap());
@@ -80,6 +72,12 @@ public class ReportService {
         developer1.put("LastName", "Tester");
         developer1.put("Mail", "tester@test.com");
         developers.add(developer1);
+
+        Map<String, String> developer2 = new HashMap<>();
+        developer2.put("Name", "Name2");
+        developer2.put("LastName", "Tester2");
+        developer2.put("Mail", "tester@test.com2");
+        developers.add(developer2);
         return developers;
     }
 }
