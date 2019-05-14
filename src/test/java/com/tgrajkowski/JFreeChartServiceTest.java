@@ -1,14 +1,15 @@
 package com.tgrajkowski;
 
 import com.tgrajkowski.service.JFreeChartServiceTime;
-import com.tgrajkowski.service.ReportService;
+import com.tgrajkowski.service.PdfService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.io.InputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.OutputStream;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -18,13 +19,13 @@ public class JFreeChartServiceTest {
     private JFreeChartServiceTime jFreeChartServiceTime;
 
     @Autowired
-    private ReportService reportService;
+    private PdfService pdfService;
 
     @Test
     public void test1() {
 //        jFreeChartService.createChart2();
-     InputStream inputStream = jFreeChartServiceTime.create();
-        reportService.generate(inputStream);
+         ByteArrayOutputStream outputStream = jFreeChartServiceTime.create();
+         pdfService.generate(outputStream);
 
     }
 

@@ -3,7 +3,6 @@ package com.tgrajkowski.service;
 import com.tgrajkowski.model.job.JobDaoIml;
 import com.tgrajkowski.model.job.JobDto;
 import org.jfree.chart.ChartFactory;
-import org.jfree.chart.ChartUtils;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.axis.DateAxis;
 import org.jfree.chart.axis.NumberAxis;
@@ -30,7 +29,7 @@ public class JFreeChartServiceTime {
     @Autowired
     private JobDaoIml jobDaoIml;
 
-    public InputStream  create() {
+    public ByteArrayOutputStream  create() {
         final XYDataset dataset = createDataset1();
         Font font =new Font("Tahoma", Font.BOLD, 14);
         final JFreeChart chart = ChartFactory.createTimeSeriesChart(
@@ -69,26 +68,14 @@ public class JFreeChartServiceTime {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        byte[] byteArray=bas.toByteArray();
-
-        InputStream inputStream = new ByteArrayInputStream(bas.toByteArray());
-
-//        try (OutputStream out= new FileOutputStream("chart.png")){
-//            ChartUtils.writeChartAsPNG(out, chart, 1200, 600);
-//
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-
-        return inputStream;
+        return bas;
 
     }
 
     private XYDataset createDataset1() {
 
         final TimeSeries s1 = new TimeSeries("Random Data 1");
-        List<JobDto> jobDtos = jobDaoIml.findPipelinedStatements();
+        List<JobDto> jobDtos = jobDaoIml.findDataForMonthlyChart();
         for (JobDto jobDto: jobDtos) {
             s1.add(new Day(jobDto.getDate()), jobDto.getCount());
         }
@@ -102,7 +89,7 @@ public class JFreeChartServiceTime {
 
     private XYDataset createDataset2() {
         final TimeSeries s2 = new TimeSeries("Count Login Users");
-        List<JobDto> jobDtos = jobDaoIml.findPipelinedStatements();
+        List<JobDto> jobDtos = jobDaoIml.findDataForMonthlyChart();
         for (JobDto jobDto: jobDtos) {
             s2.add(new Day(jobDto.getDate()), (int)(Math.random()*100)+1);
         }
@@ -111,6 +98,5 @@ public class JFreeChartServiceTime {
         dataset.addSeries(s2);
 
         return dataset;
-
     }
 }
