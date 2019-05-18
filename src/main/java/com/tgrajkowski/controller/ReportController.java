@@ -19,7 +19,7 @@ import java.io.OutputStream;
 import java.net.http.HttpResponse;
 
 @RestController
-@CrossOrigin(origins = "*")
+//@CrossOrigin(origins = "*")
 public class ReportController {
     @Autowired
     private ReportService reportService;
