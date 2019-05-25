@@ -1,6 +1,6 @@
 package com.tgrajkowski.service;
 
-import com.tgrajkowski.model.job.JobDaoIml;
+import com.tgrajkowski.model.job.JobDaoProxy;
 import com.tgrajkowski.model.job.JobDto;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.JFreeChart;
@@ -20,14 +20,16 @@ import org.springframework.stereotype.Service;
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.*;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
 @Service
 public class JFreeChartServiceTime {
+
     @Autowired
-    private JobDaoIml jobDaoIml;
+    private JobDaoProxy jobDaoProxy;
 
     public ByteArrayOutputStream  create() {
         final XYDataset dataset = createDataset1();
@@ -75,7 +77,7 @@ public class JFreeChartServiceTime {
     private XYDataset createDataset1() {
 
         final TimeSeries s1 = new TimeSeries("Random Data 1");
-        List<JobDto> jobDtos = jobDaoIml.findDataForMonthlyChart();
+        List<JobDto> jobDtos = jobDaoProxy.findDataForMonthlyChart();
         for (JobDto jobDto: jobDtos) {
             s1.add(new Day(jobDto.getDate()), jobDto.getCount());
         }
@@ -89,7 +91,7 @@ public class JFreeChartServiceTime {
 
     private XYDataset createDataset2() {
         final TimeSeries s2 = new TimeSeries("Count Login Users");
-        List<JobDto> jobDtos = jobDaoIml.findDataForMonthlyChart();
+        List<JobDto> jobDtos = jobDaoProxy.findDataForMonthlyChart();
         for (JobDto jobDto: jobDtos) {
             s2.add(new Day(jobDto.getDate()), (int)(Math.random()*100)+1);
         }

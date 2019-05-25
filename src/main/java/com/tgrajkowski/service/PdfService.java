@@ -1,6 +1,6 @@
 package com.tgrajkowski.service;
 
-import com.tgrajkowski.model.job.JobDaoIml;
+import com.tgrajkowski.model.job.JobDaoProxy;
 import com.tgrajkowski.model.job.active.title.ActiveTitle;
 import com.tgrajkowski.model.job.active.user.ActiveUser;
 import fr.opensagres.xdocreport.converter.ConverterTypeTo;
@@ -27,7 +27,7 @@ import java.util.Map;
 public class PdfService {
 
     @Autowired
-    private JobDaoIml jobDaoIml;
+    private JobDaoProxy jobDaoProxy;
 
     public ByteArrayOutputStream generate(ByteArrayOutputStream byteArrayOutputStream) {
         try {
@@ -87,7 +87,7 @@ public class PdfService {
 
     public List<Map<String, String>> getActiveUsers() {
         List<Map<String, String>> activeUsers = new ArrayList<>();
-        List<ActiveUser> activeUsersFound = jobDaoIml.findTheMostActiveUsers();
+        List<ActiveUser> activeUsersFound = jobDaoProxy.findTheMostActiveUsers();
         for (ActiveUser activeUser : activeUsersFound) {
             Map<String, String> user = new HashMap<>();
             user.put("login", activeUser.getLogin());
@@ -100,7 +100,7 @@ public class PdfService {
 
     public List<Map<String, String>> getActiveTitle() {
         List<Map<String, String>> activeUsers = new ArrayList<>();
-        List<ActiveTitle> theMostActiveTitle = jobDaoIml.findTheMostActiveTitle();
+        List<ActiveTitle> theMostActiveTitle = jobDaoProxy.findTheMostActiveTitle();
         for (ActiveTitle activeUser : theMostActiveTitle) {
             Map<String, String> title = new HashMap<>();
             title.put("title", activeUser.getTitle());
