@@ -59,7 +59,7 @@ public class JFreeChartServiceTime {
         plot.setBackgroundPaint(new Color(0, 0, 0, 0));
         plot.setOutlineVisible(false);
         final DateAxis axis = (DateAxis) plot.getDomainAxis();
-        axis.setDateFormatOverride(new SimpleDateFormat("MMM-yyyy"));
+        axis.setDateFormatOverride(new SimpleDateFormat("dd-MMM-yyyy"));
 
         chart.setBackgroundPaint(new Color(0, 0, 0, 0));
 
