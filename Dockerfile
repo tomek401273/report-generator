@@ -17,7 +17,12 @@ RUN apt-get update && apt-get -y install \
                       procps
 
 RUN apt-get -y install libreoffice --no-install-recommends
-COPY . .
-RUN mvn clean
-RUN mvn install
-CMD ["mvn", "spring-boot:run"]
+
+FROM adoptopenjdk/maven-openjdk11:latest
+WORKDIR /home/tomek
+COPY ./target/report-generator-0.0.1-SNAPSHOT.jar ./app.jar
+CMD ["java", "-jar", "./app.jar"]
+#COPY . .
+#RUN mvn clean
+#RUN mvn install
+#CMD ["mvn", "spring-boot:run"]
