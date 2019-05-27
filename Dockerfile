@@ -1,4 +1,5 @@
 FROM adoptopenjdk/maven-openjdk11:latest
+WORKDIR /home/tomek
 
 RUN apt-get update && apt-get -y install \
                       apt-transport-https \
@@ -18,8 +19,6 @@ RUN apt-get update && apt-get -y install \
 
 RUN apt-get -y install libreoffice --no-install-recommends
 
-FROM adoptopenjdk/maven-openjdk11:latest
-WORKDIR /home/tomek
 COPY ./target/report-generator-0.0.1-SNAPSHOT.jar ./app.jar
 CMD ["java", "-jar", "./app.jar"]
 #COPY . .

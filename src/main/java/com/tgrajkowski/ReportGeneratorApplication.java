@@ -12,18 +12,18 @@ import org.springframework.context.annotation.Bean;
 @EnableDiscoveryClient
 @SpringBootApplication
 public class ReportGeneratorApplication {
-    @Value("${cloud-repository.own.value}")
-    private String myString;
+//    @Value("${cloud-repository.own.value}")
+//    private String myString;
 
     public static void main(String[] args) {
         SpringApplication.run(ReportGeneratorApplication.class, args);
 
     }
 
-    @Bean
-    public void initBean() {
-        System.out.println("checking is it really working...: "+myString);
-    }
+//    @Bean
+//    public void initBean() {
+//        System.out.println("checking is it really working...: "+myString);
+//    }
 
     @Bean
     public Sampler defaultSampler() {
