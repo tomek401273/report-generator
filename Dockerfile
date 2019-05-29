@@ -19,10 +19,11 @@ RUN apt-get update && apt-get -y install \
 
 RUN apt-get -y install libreoffice --no-install-recommends
 
-COPY ./target/report-generator-0.0.1-SNAPSHOT.jar ./app.jar
-CMD ["java", "-jar", "./app.jar"]
+#COPY ./target/report-generator-0.0.1-SNAPSHOT.jar ./app.jar
+#CMD ["java", "-jar", "./app.jar"]
 
-#COPY . .
-#RUN mvn clean
-#RUN mvn install
-#CMD ["mvn", "spring-boot:run"]
+COPY . .
+RUN mvn clean
+RUN mvn install
+CMD ["mvn", "spring-boot:run"]
+#
