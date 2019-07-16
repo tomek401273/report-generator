@@ -8,13 +8,12 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.ByteArrayOutputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStream;
+import java.io.*;
 
 import static org.junit.Assert.*;
 
@@ -29,12 +28,14 @@ public class ConverterServiceTest {
         final DocumentFormat targetFormat = DefaultDocumentFormatRegistry.getFormatByExtension("pdf");
         MultipartFile file = MultipartFilesForTests.docx();
 
+
         ByteArrayOutputStream byteArrayOutputStream = converterService.doConvert(targetFormat, file.getInputStream(), file.getOriginalFilename());
-        OutputStream outputStream = new FileOutputStream("/home/tomek/Documents/samples2/raport-generator/src/test/java/resources/converted-pdf.pdf");
+        OutputStream outputStream = new FileOutputStream(new File("src/test/java/resources/converted-pdf.pdf"));
         byteArrayOutputStream.writeTo(outputStream);
         byteArrayOutputStream.close();
         outputStream.close();
 
-
+// /home/tomek/Documents/samples2/raport-generator/converted-pdf.pdf
+// /home/tomek/Documents/samples2/raport-generator/src/test/java/resources/converted-pdf.pdf
     }
 }

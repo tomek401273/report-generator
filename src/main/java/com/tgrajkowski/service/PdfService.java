@@ -73,7 +73,7 @@ public class PdfService {
         return null;
     }
 
-    public Map<String, String> getProjectMap() {
+    private Map<String, String> getProjectMap() {
         Map<String, String> project = new HashMap<String, String>();
         project.put("Title", "Bibliography Monthly Raport Usage");
         project.put("Table1Title", "The most 10 active users in this moth");
@@ -85,7 +85,7 @@ public class PdfService {
         return project;
     }
 
-    public List<Map<String, String>> getActiveUsers() {
+    private List<Map<String, String>> getActiveUsers() {
         List<Map<String, String>> activeUsers = new ArrayList<>();
         List<ActiveUser> activeUsersFound = jobDaoProxy.findTheMostActiveUsers();
         for (ActiveUser activeUser : activeUsersFound) {
@@ -98,7 +98,7 @@ public class PdfService {
         return activeUsers;
     }
 
-    public List<Map<String, String>> getActiveTitle() {
+    private List<Map<String, String>> getActiveTitle() {
         List<Map<String, String>> activeUsers = new ArrayList<>();
         List<ActiveTitle> theMostActiveTitle = jobDaoProxy.findTheMostActiveTitle();
         for (ActiveTitle activeUser : theMostActiveTitle) {

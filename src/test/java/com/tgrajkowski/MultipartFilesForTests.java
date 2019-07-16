@@ -1,5 +1,7 @@
 package com.tgrajkowski;
 
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
 import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -24,9 +26,12 @@ public class MultipartFilesForTests {
                 "application/msword",
                 content);
         return multipartFile;
-    }   public static MultipartFile docx () {
+    }
+
+    public static MultipartFile docx () {
         byte[] content = null;
-        try {content = Files.readAllBytes(Paths.get("/home/tomek/Documents/samples2/raport-generator/src/test/java/resources/docx.docx")); } catch (final IOException e) { }
+        Resource resource = new ClassPathResource("docx.docx");
+        try {content = Files.readAllBytes(Paths.get(resource.getURI().getPath())); } catch (final IOException e) { }
         MultipartFile multipartFile = new MockMultipartFile("docx.docx", "docx.docx",
                 "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
                 content);

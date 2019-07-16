@@ -31,9 +31,9 @@ public class JFreeChartServiceTime {
     @Autowired
     private JobDaoProxy jobDaoProxy;
 
-    public ByteArrayOutputStream  create() {
+    public ByteArrayOutputStream create() {
         final XYDataset dataset = createDataset1();
-        Font font =new Font("Tahoma", Font.BOLD, 14);
+        Font font = new Font("Tahoma", Font.BOLD, 14);
         final JFreeChart chart = ChartFactory.createTimeSeriesChart(
                 "Bibliography Usage",
                 "Time",
@@ -63,7 +63,7 @@ public class JFreeChartServiceTime {
 
         chart.setBackgroundPaint(new Color(0, 0, 0, 0));
 
-        BufferedImage objBufferedImage=chart.createBufferedImage(1200, 600);
+        BufferedImage objBufferedImage = chart.createBufferedImage(1200, 600);
         ByteArrayOutputStream bas = new ByteArrayOutputStream();
         try {
             ImageIO.write(objBufferedImage, "png", bas);
@@ -78,7 +78,7 @@ public class JFreeChartServiceTime {
 
         final TimeSeries s1 = new TimeSeries("Random Data 1");
         List<JobDto> jobDtos = jobDaoProxy.findDataForMonthlyChart();
-        for (JobDto jobDto: jobDtos) {
+        for (JobDto jobDto : jobDtos) {
             s1.add(new Day(jobDto.getDate()), jobDto.getCount());
         }
 
@@ -92,8 +92,8 @@ public class JFreeChartServiceTime {
     private XYDataset createDataset2() {
         final TimeSeries s2 = new TimeSeries("Count Login Users");
         List<JobDto> jobDtos = jobDaoProxy.findDataForMonthlyChart();
-        for (JobDto jobDto: jobDtos) {
-            s2.add(new Day(jobDto.getDate()), (int)(Math.random()*100)+1);
+        for (JobDto jobDto : jobDtos) {
+            s2.add(new Day(jobDto.getDate()), (int) (Math.random() * 100) + 1);
         }
 
         final TimeSeriesCollection dataset = new TimeSeriesCollection();
