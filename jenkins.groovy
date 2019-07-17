@@ -1,0 +1,11 @@
+node ('master') {
+    stage('pull') {
+        git branch: 'master', url: 'https://github.com/tomek401273/report-generator.git'
+    }
+    stage('build-report') {
+        sh script: 'docker build -t tomek371240/report-service:1.1 .'
+    }
+    stage('deploy-report') {
+        sh script: 'docker stack deploy -c report.yml report22'
+    }
+}
