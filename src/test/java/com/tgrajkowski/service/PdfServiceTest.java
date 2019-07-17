@@ -10,6 +10,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.io.*;
@@ -20,6 +21,7 @@ import java.util.List;
 import static org.junit.Assert.*;
 @RunWith(SpringRunner.class)
 @SpringBootTest
+@ActiveProfiles("test")
 public class PdfServiceTest {
     @InjectMocks
     private JFreeChartServiceTime jFreeChartServiceTime;
@@ -43,7 +45,6 @@ public class PdfServiceTest {
         jobDtos.add(new JobDto(calendar.getTime(), 2));
         Mockito.when(jobDaoProxy.findDataForMonthlyChart()).thenReturn(jobDtos);
 
-
         List<ActiveUser> activeUsersFound = new ArrayList<>();
         activeUsersFound.add(new ActiveUser("tomek", 100));
         activeUsersFound.add(new ActiveUser("tomek2", 102));
@@ -56,7 +57,6 @@ public class PdfServiceTest {
         theMostActiveTitle.add(new ActiveTitle("title1", 30));
         Mockito.when(jobDaoProxy.findTheMostActiveTitle()).thenReturn(theMostActiveTitle);
 
-
         ByteArrayOutputStream chart = jFreeChartServiceTime.create();
         ByteArrayOutputStream byteArrayOutputStream = pdfService.generate(chart);
 
@@ -65,6 +65,4 @@ public class PdfServiceTest {
         byteArrayOutputStream.close();
         outputStream.close();
     }
-
-
 }
