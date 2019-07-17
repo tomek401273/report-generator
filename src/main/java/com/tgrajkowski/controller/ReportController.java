@@ -33,26 +33,4 @@ public class ReportController {
         FileCopyUtils.copy(byteArrayOutputStream.toByteArray(), response.getOutputStream() );
 
     }
-
-//    @RequestMapping(value="/get", method=RequestMethod.GET)
-//    public ResponseEntity<byte[]> getPDF() {
-//        // convert JSON to Employee
-//
-//
-//        // generate the file
-//
-//        // retrieve contents of "C:/tmp/report.pdf" that were written in showHelp
-////        byte[] contents = (...);
-//        OutputStream byteArrayOutputStream =reportService.createRepart();
-//
-//
-//        HttpHeaders headers = new HttpHeaders();
-//        headers.setContentType(MediaType.APPLICATION_PDF);
-//        // Here you have to set the actual filename of your pdf
-//        String filename = "output.pdf";
-//        headers.setContentDispositionFormData(filename, filename);
-//        headers.setCacheControl("must-revalidate, post-check=0, pre-check=0");
-//        ResponseEntity<byte[]> response = new ResponseEntity<>(byteArrayOutputStream.toByteArray(), headers, HttpStatus.OK);
-//        return response;
-//    }
 }
